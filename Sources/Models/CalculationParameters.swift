@@ -28,7 +28,7 @@ import Foundation
 /**
   Customizable parameters for calculating prayer times
  */
-public struct CalculationParameters: Codable, Equatable {
+@objc public class CalculationParameters: NSObject {
     public var method: CalculationMethod = .other
     public var fajrAngle: Double
     public var maghribAngle: Double?
@@ -41,27 +41,27 @@ public struct CalculationParameters: Codable, Equatable {
     public var shafaq: Shafaq = .general
     var methodAdjustments: PrayerAdjustments = PrayerAdjustments()
 
-    init(fajrAngle: Double, ishaAngle: Double) {
+    public init(fajrAngle: Double, ishaAngle: Double) {
         self.fajrAngle = fajrAngle
         self.ishaAngle = ishaAngle
     }
 
-    init(fajrAngle: Double, ishaInterval: Minute) {
+    convenience init(fajrAngle: Double, ishaInterval: Minute) {
         self.init(fajrAngle: fajrAngle, ishaAngle: 0)
         self.ishaInterval = ishaInterval
     }
 
-    init(fajrAngle: Double, ishaAngle: Double, method: CalculationMethod) {
+    convenience init(fajrAngle: Double, ishaAngle: Double, method: CalculationMethod) {
         self.init(fajrAngle: fajrAngle, ishaAngle: ishaAngle)
         self.method = method
     }
 
-    init(fajrAngle: Double, ishaInterval: Minute, method: CalculationMethod) {
+    convenience init(fajrAngle: Double, ishaInterval: Minute, method: CalculationMethod) {
         self.init(fajrAngle: fajrAngle, ishaInterval: ishaInterval)
         self.method = method
     }
     
-    init(fajrAngle: Double, maghribAngle: Double, ishaAngle: Double, method: CalculationMethod) {
+    convenience init(fajrAngle: Double, maghribAngle: Double, ishaAngle: Double, method: CalculationMethod) {
         self.init(fajrAngle: fajrAngle, ishaAngle: ishaAngle, method: method)
         self.maghribAngle = maghribAngle
     }

@@ -89,7 +89,7 @@ import Foundation
   Defaults to angles of 0°, should generally be used for making a custom method and setting your own values.
 
 */
-public enum CalculationMethod: String, Codable, CaseIterable {
+@objc public enum CalculationMethod: Int, Codable, CaseIterable {
 
     // Muslim World League
     case muslimWorldLeague
@@ -133,29 +133,29 @@ public enum CalculationMethod: String, Codable, CaseIterable {
     public var params: CalculationParameters {
         switch(self) {
         case .muslimWorldLeague:
-            var params = CalculationParameters(fajrAngle: 18, ishaAngle: 17, method: self)
+            let params = CalculationParameters(fajrAngle: 18, ishaAngle: 17, method: self)
             params.methodAdjustments = PrayerAdjustments(dhuhr: 1)
             return params
         case .egyptian:
-            var params = CalculationParameters(fajrAngle: 19.5, ishaAngle: 17.5, method: self)
+            let params = CalculationParameters(fajrAngle: 19.5, ishaAngle: 17.5, method: self)
             params.methodAdjustments = PrayerAdjustments(dhuhr: 1)
             return params
         case .karachi:
-            var params = CalculationParameters(fajrAngle: 18, ishaAngle: 18, method: self)
+            let params = CalculationParameters(fajrAngle: 18, ishaAngle: 18, method: self)
             params.methodAdjustments = PrayerAdjustments(dhuhr: 1)
             return params
         case .ummAlQura:
             return CalculationParameters(fajrAngle: 18.5, ishaInterval: 90, method: self)
         case .dubai:
-            var params = CalculationParameters(fajrAngle: 18.2, ishaAngle: 18.2, method: self)
+            let params = CalculationParameters(fajrAngle: 18.2, ishaAngle: 18.2, method: self)
             params.methodAdjustments = PrayerAdjustments(sunrise: -3, dhuhr: 3, asr: 3, maghrib: 3)
             return params
         case .moonsightingCommittee:
-            var params = CalculationParameters(fajrAngle: 18, ishaAngle: 18, method: self)
+            let params = CalculationParameters(fajrAngle: 18, ishaAngle: 18, method: self)
             params.methodAdjustments = PrayerAdjustments(dhuhr: 5, maghrib: 3)
             return params
         case .northAmerica:
-            var params = CalculationParameters(fajrAngle: 15, ishaAngle: 15, method: self)
+            let params = CalculationParameters(fajrAngle: 15, ishaAngle: 15, method: self)
             params.methodAdjustments = PrayerAdjustments(dhuhr: 1)
             return params
         case .kuwait:
@@ -163,14 +163,14 @@ public enum CalculationMethod: String, Codable, CaseIterable {
         case .qatar:
             return CalculationParameters(fajrAngle: 18, ishaInterval: 90, method: self)
         case .singapore:
-            var params = CalculationParameters(fajrAngle: 20, ishaAngle: 18, method: self)
+            let params = CalculationParameters(fajrAngle: 20, ishaAngle: 18, method: self)
             params.methodAdjustments = PrayerAdjustments(dhuhr: 1)
             params.rounding = .up
             return params
         case .tehran:
             return CalculationParameters(fajrAngle: 17.7, maghribAngle: 4.5, ishaAngle: 14, method: self)
         case .turkey:
-            var params = CalculationParameters(fajrAngle: 18, ishaAngle: 17, method: self)
+            let params = CalculationParameters(fajrAngle: 18, ishaAngle: 17, method: self)
             params.methodAdjustments = PrayerAdjustments(fajr: 0, sunrise: -7, dhuhr: 5, asr: 4, maghrib: 7, isha: 0)
             return params
         case .other:
