@@ -92,43 +92,43 @@ import Foundation
 @objc public enum CalculationMethod: Int, Codable, CaseIterable {
 
     // Muslim World League
-    case muslimWorldLeague
+    case muslimWorldLeague = 0
 
     // Egyptian General Authority of Survey
-    case egyptian
+    case egyptian = 1
 
     // University of Islamic Sciences, Karachi
-    case karachi
+    case karachi = 2
 
     // Umm al-Qura University, Makkah
-    case ummAlQura
+    case ummAlQura = 3
 
     // UAE
-    case dubai
+    case dubai = 4
 
     // Moonsighting Committee
-    case moonsightingCommittee
+    case moonsightingCommittee = 5
 
     // ISNA
-    case northAmerica
+    case northAmerica = 6
 
     // Kuwait
-    case kuwait
+    case kuwait = 7
 
     // Qatar
-    case qatar
+    case qatar = 8
 
     // Singapore
-    case singapore
+    case singapore = 9
 
     // Institute of Geophysics, University of Tehran
-    case tehran
+    case tehran = 10
 
     // Dianet
-    case turkey
+    case turkey = 11
 
     // Other
-    case other
+    case other = 12
 
     public var params: CalculationParameters {
         switch(self) {
