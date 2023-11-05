@@ -28,7 +28,7 @@ import Foundation
 /**
   Customizable parameters for calculating prayer times
  */
-public struct CalculationParameters: Codable, Equatable {
+@objc public class CalculationParameters: NSObject, Codable {
     public var method: CalculationMethod = .other
     public var fajrAngle: Double
     public var maghribAngle: Double?
@@ -41,33 +41,33 @@ public struct CalculationParameters: Codable, Equatable {
     public var shafaq: Shafaq = .general
     var methodAdjustments: PrayerAdjustments = PrayerAdjustments()
 
-    init(fajrAngle: Double, ishaAngle: Double) {
+    public init(fajrAngle: Double, ishaAngle: Double) {
         self.fajrAngle = fajrAngle
         self.ishaAngle = ishaAngle
     }
 
-    init(fajrAngle: Double, ishaInterval: Minute) {
+    convenience init(fajrAngle: Double, ishaInterval: Minute) {
         self.init(fajrAngle: fajrAngle, ishaAngle: 0)
         self.ishaInterval = ishaInterval
     }
 
-    init(fajrAngle: Double, ishaAngle: Double, method: CalculationMethod) {
+    convenience init(fajrAngle: Double, ishaAngle: Double, method: CalculationMethod) {
         self.init(fajrAngle: fajrAngle, ishaAngle: ishaAngle)
         self.method = method
     }
 
-    init(fajrAngle: Double, ishaInterval: Minute, method: CalculationMethod) {
+    convenience init(fajrAngle: Double, ishaInterval: Minute, method: CalculationMethod) {
         self.init(fajrAngle: fajrAngle, ishaInterval: ishaInterval)
         self.method = method
     }
     
-    init(fajrAngle: Double, maghribAngle: Double, ishaAngle: Double, method: CalculationMethod) {
+    convenience init(fajrAngle: Double, maghribAngle: Double, ishaAngle: Double, method: CalculationMethod) {
         self.init(fajrAngle: fajrAngle, ishaAngle: ishaAngle, method: method)
         self.maghribAngle = maghribAngle
     }
 
     func nightPortions(using coordinates: Coordinates) -> (fajr: Double, isha: Double) {
-        let currentHighLatitudeRule = highLatitudeRule ?? .recommended(for: coordinates)
+        let currentHighLatitudeRule = highLatitudeRule == .auto || highLatitudeRule == nil ? .recommended(for: coordinates) : highLatitudeRule
 
         switch currentHighLatitudeRule {
         case .middleOfTheNight:
@@ -76,6 +76,9 @@ public struct CalculationParameters: Codable, Equatable {
             return (1/7, 1/7)
         case .twilightAngle:
             return (self.fajrAngle / 60, self.ishaAngle / 60)
+        default:
+            assertionFailure("Latitude rule is not specified")
+            return (1/2, 1/2)
         }
     }
 }

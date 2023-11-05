@@ -45,7 +45,8 @@ import Foundation
   The night is divided into portions of roughly 1/3. The exact value is derived by dividing the fajr/isha angles by 60.
   This can be used to prevent difficult fajr and isha times at certain locations.
  */
-public enum HighLatitudeRule: String, Codable, CaseIterable {
+public enum HighLatitudeRule: Int, Codable, CaseIterable {
+    case auto
     case middleOfTheNight
     case seventhOfTheNight
     case twilightAngle
